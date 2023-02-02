@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      background-color: #05080a;
+      color: #4bd859;
+    }
+
+    #info {
+      margin: 100px 6px;
+      text-align: right;
+    }
+
+    #date {
+      font-size: 60px;
+      font-family: 'New Century Schoolbook';
+      padding-bottom: 20px;
+    }
+
+    #time {
+      font-size: 90px;
+      font-family: 'New Century Schoolbook';
+      padding-bottom: 30px;
+    }
+
+    #greeting {
+      font-size: 40px;
+      font-family: 'New Century Schoolbook';
+      padding-bottom: 20px;
+    }
+
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    #list {
+      text-align: center;
+      font-size: 30px;
+      background-color: rgba(240, 240, 240, .3);
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    ul {
+      display: inline-block;
+      text-align: left;
+      line-height: 50px;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    li::before {
+      content: '';
+      padding-right: 10px;
+      color: #8a8a8e;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="info">
+    <div id="date"></div>
+    <div id="time"></div>
+    <div id="greeting"></div>
+  </div>
+  <div id="list">
+    <ul id="ul1">
+      <li><a href="https://duckduckgo.com">DuckDuckGo</a></li>
+      <li><a href="https://www.reddit.com/">Reddit</a></li>
+      <li><a href="https://www.google.com/">Google</a></li>
+      <li><a href="https://github.com/">GitHub</a></li>
+    </ul>
+    <ul id="ul2">
+      <li><a href="https://www.udemy.com/">Udemy</a></li>
+      <li><a href="https://wiki.archlinux.org/">ArchWiki</a></li>
+      <li><a href="https://suckless.org/">Suckless.org</a></li>
+      <li><a href="https://www.youtube.com/">YouTube</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>
+
+<script lang="javascript">
+  const time = document.getElementById("time")
+  const date = document.getElementById("date")
+  const greeting = document.getElementById("greeting")
+  const tick = () => {
+    const now = new Date()
+    const hours = now.getHours()
+    const message = (() => {
+      if (hours > 4 && hours < 12) {
+        return "Good Morning"
+      } else if (hours >= 12 && hours < 16) {
+        return "Good Afternoon"
+      } else if (hours >= 16 && hours < 22) {
+        return "Good Evening"
+      } else {
+        return "Good Night"
+      }
+    })()
+    const time_in_string = now.toLocaleString('en-US', {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    })
+    const date_in_string = now.toLocaleString('en-US', {
+      weekday: "short",
+      month: "short",
+      day: "2-digit",
+    }).replace(",", "")
+    time.textContent = time_in_string
+    date.textContent = date_in_string
+    greeting.textContent = message
+  }
+  tick()
+  setInterval(tick, 1000)
+</script>
